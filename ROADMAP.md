@@ -1,6 +1,208 @@
 # Roadmap
 
-1. Repository and engineering standards
-2. API foundation
-3. Data, integration, and testing options
-4. Production readiness and template packaging
+## Vision
+
+`dotnet-template` will provide a production-ready, enterprise-ready .NET starter template with OSS-quality governance and documentation. It will be reusable, option-driven, easy to understand, and straightforward to extend without weakening its defaults.
+
+The template is intended to remain stable across thousands of generated projects over many years. That requires explicit contracts, isolated optional capabilities, predictable upgrades, and compatibility decisions made before implementation.
+
+## Design Principles
+
+- Standardize contracts and expected behavior before implementing features.
+- Build commonly used capabilities before optional enterprise integrations.
+- Keep defaults simple, useful, and safe.
+- Isolate optional features so they do not complicate the default path.
+- Make every milestone independently reviewable and valuable to adoption or maintenance.
+- Add abstractions only when they solve a demonstrated template problem.
+- Minimize breaking changes to options and generated output.
+- Favor long-term maintainability over short-term implementation convenience.
+
+## Evolution Diagram
+
+```text
+Repository Foundation
+        │
+        ▼
+Core Standards
+        │
+        ▼
+Template Option Model
+        │
+        ▼
+API Foundation
+        │
+        ▼
+Data Foundation
+        │
+        ▼
+Enterprise Capabilities
+        │
+        ▼
+Production Readiness
+        │
+        ▼
+Documentation & Adoption
+```
+
+## Milestone Summary
+
+| Milestone | Name | Goal | Deliverable |
+|---|---|---|---|
+| M1 | Repository Foundation | Establish a professional, reviewable repository | OSS-like repository foundation |
+| M2 | Core Standards | Define engineering decisions before code | Approved engineering standards |
+| M3 | Template Option Model | Stabilize configuration and compatibility contracts | Scalable option model |
+| M4 | API Template Core | Implement the common service path | Production-ready API foundation |
+| M5 | Data Template Core | Add reliable relational data support | Production-ready data foundation |
+| M6 | Enterprise Capabilities | Add isolated integration and processing options | Optional enterprise modules |
+| M7 | Production Readiness | Automate quality, security, telemetry, and delivery checks | Production engineering baseline |
+| M8 | Documentation & Adoption | Make the template easy to evaluate, use, and extend | Documented first stable release |
+
+## Detailed Milestones
+
+### M1 — Repository Foundation
+
+**Goal:** Establish the repository controls required for transparent contribution and maintenance.
+
+**Scope:**
+
+- README and MIT License
+- GitHub issue and pull request templates
+- CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, ROADMAP, and CHANGELOG
+- Markdown linting and link validation
+
+**Review gate:** Governance documents have distinct purposes, repository links resolve, and documentation checks run in CI.
+
+**Deliverable:** A professional OSS-like repository foundation.
+
+### M2 — Core Standards
+
+**Goal:** Agree on engineering behavior before template implementation makes it expensive to change.
+
+**Scope:**
+
+- Coding and project structure standards
+- API, validation, logging, testing, and documentation standards
+- CI/CD standards and security baseline
+- Template philosophy, boundaries, and non-goals
+
+**Review gate:** Each standard defines its problem, decision, trade-offs, applicability, and verification method. Conflicting or speculative guidance is removed.
+
+**Deliverable:** Engineering standards established before implementation.
+
+### M3 — Template Option Model
+
+**Goal:** Define a stable configuration contract that can grow without creating invalid project combinations.
+
+**Scope:**
+
+- Option matrix and compatibility rules
+- Default configuration
+- Mandatory and optional capability boundaries
+- Supported .NET LTS versions
+- Minimal API versus Controllers guidance
+- Simple, layered, and modular structure guidance
+
+**Review gate:** Defaults generate the smallest supported production service; invalid combinations are rejected with actionable messages; every option has deterministic output and a compatibility test plan.
+
+**Deliverable:** A stable, scalable configuration model.
+
+### M4 — API Template Core
+
+**Goal:** Implement the most common generated-service path before adding optional infrastructure.
+
+**Scope:**
+
+- ASP.NET Core Web API foundation
+- Controllers with an optional Minimal API path
+- Dependency injection and configuration
+- Validation and consistent error handling
+- Response conventions and OpenAPI
+- Health checks
+- Authentication and authorization
+
+**Review gate:** Supported API variants generate independently, build without manual changes, expose documented health and OpenAPI behavior, enforce the selected security configuration, and pass API tests.
+
+**Deliverable:** A reusable production-ready API foundation.
+
+### M5 — Data Template Core
+
+**Goal:** Provide reliable relational persistence without coupling API-only projects to data infrastructure.
+
+**Scope:**
+
+- EF Core
+- PostgreSQL, SQL Server, and SQLite providers
+- Migration workflow
+- Transaction guidance
+- Integration test infrastructure
+- Testcontainers guidance
+
+**Review gate:** Each provider can be selected independently, migrations and transaction behavior are documented, generated projects build, and database integration tests pass against real provider instances where supported.
+
+**Deliverable:** A reusable production-ready data foundation.
+
+### M6 — Enterprise Capabilities
+
+**Goal:** Add integration and processing capabilities as isolated, composable options.
+
+**Scope:**
+
+- HTTP integrations
+- Messaging with RabbitMQ, Azure Service Bus, or Kafka
+- Outbox and inbox-outbox reliability options
+- Background jobs
+- Redis caching
+- Cross-option compatibility validation
+
+**Review gate:** Each capability is opt-in, absent from default output, covered by compatibility tests, and documented with operational requirements and failure behavior.
+
+**Deliverable:** Optional enterprise capabilities that do not affect the default template.
+
+### M7 — Production Readiness
+
+**Goal:** Make generated projects verifiable and operable through automated engineering controls.
+
+**Scope:**
+
+- GitHub Actions and release checks
+- Docker packaging
+- Formatting, linting, and static analysis
+- Dependency and security scanning
+- OpenTelemetry and structured logging
+- Release readiness validation
+
+**Review gate:** The default and representative option combinations pass build, test, analysis, scanning, container, and telemetry checks in CI with documented failure handling.
+
+**Deliverable:** A production-quality engineering baseline.
+
+### M8 — Documentation & Adoption
+
+**Goal:** Enable developers to evaluate, generate, operate, and extend projects without relying on repository authors.
+
+**Scope:**
+
+- Getting started and template usage
+- Option and architecture guides
+- API and testing guides
+- CI/CD and Docker guides
+- Sample module
+- Release and upgrade documentation
+- First stable release
+
+**Review gate:** A new user can install the template, generate the default and documented variants, run tests, build a container, understand selected options, and extend the sample using verified instructions.
+
+**Deliverable:** A template developers can understand, adopt, and extend with confidence.
+
+## Success Criteria
+
+The roadmap is complete when:
+
+- the default template produces a production-ready service without unnecessary optional infrastructure;
+- supported enterprise capabilities are selectable, isolated, tested, and documented;
+- generated projects are reusable and maintainable across teams;
+- repository governance, documentation, and releases meet OSS-quality expectations;
+- junior developers can follow verified workflows without hidden project knowledge;
+- senior engineers can evaluate architecture decisions, trade-offs, and extension points;
+- option contracts and generated output are stable enough to support thousands of projects;
+- compatibility and upgrade guidance minimize breaking changes over time; and
+- every supported configuration is validated through automated build, test, and CI checks.
