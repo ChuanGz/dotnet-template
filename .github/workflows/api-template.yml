@@ -16,4 +16,6 @@ jobs:
       - run: bash tests/m5/run.sh
       - run: bash tests/m6/run.sh
       - run: bash tests/m7/run.sh
+        env:
+          REQUIRE_DOCKER: "1"
       - run: bash tests/m8/run.sh

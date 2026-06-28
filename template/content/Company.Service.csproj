@@ -18,30 +18,30 @@
     <Observability>ObservabilityToken</Observability>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" Condition="'$(ApiVersioningEnabled)' == 'true'" />
-    <PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" Condition="'$(ApiVersioningEnabled)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.28" Condition="'$(TargetFramework)' == 'net8.0' and '$(AuthenticationMode)' != 'none'" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.9" Condition="'$(TargetFramework)' == 'net10.0' and '$(AuthenticationMode)' != 'none'" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" Condition="'$(OpenApiEnabled)' == 'true'" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.28" Condition="'$(TargetFramework)' == 'net8.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.28" Condition="'$(TargetFramework)' == 'net8.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="8.0.28" Condition="'$(TargetFramework)' == 'net8.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" Condition="'$(TargetFramework)' == 'net8.0' and '$(DatabaseProvider)' == 'postgresql'" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.28" Condition="'$(TargetFramework)' == 'net8.0' and '$(DatabaseProvider)' == 'sqlserver'" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.28" Condition="'$(TargetFramework)' == 'net8.0' and '$(DatabaseProvider)' == 'sqlite'" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.9" Condition="'$(TargetFramework)' == 'net10.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9" Condition="'$(TargetFramework)' == 'net10.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="10.0.9" Condition="'$(TargetFramework)' == 'net10.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" />
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.2" Condition="'$(TargetFramework)' == 'net10.0' and '$(DatabaseProvider)' == 'postgresql'" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.9" Condition="'$(TargetFramework)' == 'net10.0' and '$(DatabaseProvider)' == 'sqlserver'" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.9" Condition="'$(TargetFramework)' == 'net10.0' and '$(DatabaseProvider)' == 'sqlite'" />
-    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.10.0" Condition="'$(TargetFramework)' == 'net8.0' and ('$(Integration)' == 'http' or '$(Integration)' == 'hybrid')" />
-    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="10.0.1" Condition="'$(TargetFramework)' == 'net10.0' and ('$(Integration)' == 'http' or '$(Integration)' == 'hybrid')" />
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.24" Condition="'$(TargetFramework)' == 'net8.0' and '$(CacheProvider)' == 'redis'" />
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.1" Condition="'$(TargetFramework)' == 'net10.0' and '$(CacheProvider)' == 'redis'" />
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.16.0" Condition="'$(Observability)' == 'opentelemetry'" />
-    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.16.0" Condition="'$(Observability)' == 'opentelemetry'" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.16.0" Condition="'$(Observability)' == 'opentelemetry'" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.16.0" Condition="'$(Observability)' == 'opentelemetry'" />
+    <PackageReference Include="Asp.Versioning.Http" Condition="'$(ApiVersioningEnabled)' == 'true'" />
+    <PackageReference Include="Asp.Versioning.Mvc" Condition="'$(ApiVersioningEnabled)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Condition="'$(TargetFramework)' == 'net8.0' and '$(AuthenticationMode)' != 'none'" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Condition="'$(TargetFramework)' == 'net10.0' and '$(AuthenticationMode)' != 'none'" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Condition="'$(OpenApiEnabled)' == 'true'" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Condition="'$(TargetFramework)' == 'net8.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Condition="'$(TargetFramework)' == 'net8.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Condition="'$(TargetFramework)' == 'net8.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Condition="'$(TargetFramework)' == 'net8.0' and '$(DatabaseProvider)' == 'postgresql'" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Condition="'$(TargetFramework)' == 'net8.0' and '$(DatabaseProvider)' == 'sqlserver'" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Condition="'$(TargetFramework)' == 'net8.0' and '$(DatabaseProvider)' == 'sqlite'" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Condition="'$(TargetFramework)' == 'net10.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Condition="'$(TargetFramework)' == 'net10.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Condition="'$(TargetFramework)' == 'net10.0' and '$(DataProvider)' == 'efcore' and '$(DatabaseProvider)' != 'none'" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Condition="'$(TargetFramework)' == 'net10.0' and '$(DatabaseProvider)' == 'postgresql'" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Condition="'$(TargetFramework)' == 'net10.0' and '$(DatabaseProvider)' == 'sqlserver'" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Condition="'$(TargetFramework)' == 'net10.0' and '$(DatabaseProvider)' == 'sqlite'" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Condition="'$(TargetFramework)' == 'net8.0' and ('$(Integration)' == 'http' or '$(Integration)' == 'hybrid')" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Condition="'$(TargetFramework)' == 'net10.0' and ('$(Integration)' == 'http' or '$(Integration)' == 'hybrid')" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Condition="'$(TargetFramework)' == 'net8.0' and '$(CacheProvider)' == 'redis'" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Condition="'$(TargetFramework)' == 'net10.0' and '$(CacheProvider)' == 'redis'" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Condition="'$(Observability)' == 'opentelemetry'" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Condition="'$(Observability)' == 'opentelemetry'" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Condition="'$(Observability)' == 'opentelemetry'" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Condition="'$(Observability)' == 'opentelemetry'" />
   </ItemGroup>
 </Project>

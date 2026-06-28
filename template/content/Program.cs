@@ -83,8 +83,12 @@ var app = builder.Build();
 app.UseExceptionHandler();
 app.UseStatusCodePages();
 #if (OpenApi)
-app.UseSwagger();
-app.UseSwaggerUI();
+var exposeOpenApi = app.Configuration.GetValue<bool?>("OpenApi:Enabled") ?? app.Environment.IsDevelopment();
+if (exposeOpenApi)
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 #endif
 #if (HasAuthentication)
 app.UseAuthentication();

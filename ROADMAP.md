@@ -1,5 +1,57 @@
 # Roadmap
 
+The roadmap is a sequence of verifiable decision gates. A milestone is complete
+only when its evidence is present in the repository and enforced by validation.
+
+```mermaid
+flowchart LR
+  M1["M1<br/>Repository Foundation<br/>Complete"] --> M2["M2<br/>.NET Standards Adoption<br/>Complete"]
+  M2 --> M3["M3<br/>Template Option Model<br/>Complete"]
+  M3 --> M4["M4<br/>API Template Core<br/>Complete"]
+  M4 --> M5["M5<br/>Data Template Core<br/>Complete"]
+  M5 --> M6["M6<br/>Enterprise Capabilities<br/>Complete"]
+  M6 --> M7["M7<br/>Production Readiness<br/>Complete"]
+  M7 --> M8["M8<br/>Documentation and Adoption<br/>Complete"]
+
+  classDef complete fill:#dcfce7,stroke:#15803d,color:#14532d;
+  class M1,M2,M3,M4,M5,M6,M7,M8 complete;
+```
+
+## Milestone evidence map
+
+```mermaid
+flowchart TB
+  M1["M1 · Repository Foundation"] --> E1["License · governance · contribution templates<br/>Markdown lint · link validation"]
+  M2["M2 · .NET Standards Adoption"] --> E2["Standards matrix · project conventions<br/>Coding · testing · documentation controls"]
+  M3["M3 · Template Option Model"] --> E3["Versioned option contract · compatibility rules<br/>Defaults · normalization · automated cases"]
+  M4["M4 · API Template Core"] --> E4["Controllers · Minimal APIs · authentication<br/>Validation · health · OpenAPI · generation builds"]
+  M5["M5 · Data Template Core"] --> E5["EF Core · PostgreSQL · SQL Server · SQLite<br/>Migrations · transactions · provider smoke tests"]
+  M6["M6 · Enterprise Capabilities"] --> E6["HTTP · messaging contracts · reliability options<br/>Jobs · caching · compatibility coverage"]
+  M7["M7 · Production Readiness"] --> E7[".NET 8 and 10 · CI · security scanning<br/>Containers · telemetry · runtime smoke tests"]
+  M8["M8 · Documentation and Adoption"] --> E8["Getting started · options · architecture<br/>Operations · migration · deprecation guidance"]
+
+  classDef milestone fill:#e0f2fe,stroke:#0369a1,color:#0c4a6e;
+  classDef evidence fill:#f8fafc,stroke:#64748b,color:#0f172a;
+  class M1,M2,M3,M4,M5,M6,M7,M8 milestone;
+  class E1,E2,E3,E4,E5,E6,E7,E8 evidence;
+```
+
+## Completion gate
+
+```mermaid
+flowchart LR
+  Scope["Reviewed scope"] --> Deliverable["Repository deliverable"]
+  Deliverable --> Validation["Automated validation"]
+  Validation --> Documentation["Updated user and maintainer documentation"]
+  Documentation --> Decision{"All evidence verifiable?"}
+  Decision -- Yes --> Complete["Milestone complete"]
+  Decision -- No --> Open["Milestone remains open"]
+  Open --> Deliverable
+```
+
+Future scope must be added as a new reviewed milestone. Existing milestones must
+not be reopened solely to attach unrelated product features.
+
 ## Vision
 
 `dotnet-template` will provide a production-ready, enterprise-ready .NET starter template with OSS-quality governance and documentation. It will be reusable, option-driven, easy to understand, and straightforward to extend without weakening its defaults.
