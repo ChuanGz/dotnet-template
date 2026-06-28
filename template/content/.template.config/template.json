@@ -75,6 +75,14 @@
         { "choice": "sqlite", "description": "SQLite" }
       ]
     },
+    "Integration": { "type": "parameter", "datatype": "choice", "defaultValue": "none", "replaces": "IntegrationToken", "choices": [{ "choice": "none" }, { "choice": "http" }, { "choice": "messaging" }, { "choice": "hybrid" }] },
+    "MessageBroker": { "type": "parameter", "datatype": "choice", "defaultValue": "none", "replaces": "MessageBrokerToken", "choices": [{ "choice": "none" }, { "choice": "rabbitmq" }, { "choice": "azure-service-bus" }, { "choice": "kafka" }] },
+    "MessagePattern": { "type": "parameter", "datatype": "choice", "defaultValue": "none", "replaces": "MessagePatternToken", "choices": [{ "choice": "none" }, { "choice": "outbox" }, { "choice": "inbox-outbox" }] },
+    "JobProcessing": { "type": "parameter", "datatype": "choice", "defaultValue": "none", "replaces": "JobProcessingToken", "choices": [{ "choice": "none" }, { "choice": "hosted-service" }, { "choice": "hangfire" }] },
+    "CacheProvider": { "type": "parameter", "datatype": "choice", "defaultValue": "none", "replaces": "CacheProviderToken", "choices": [{ "choice": "none" }, { "choice": "memory" }, { "choice": "redis" }] },
+    "Observability": { "type": "parameter", "datatype": "choice", "defaultValue": "opentelemetry", "replaces": "ObservabilityToken", "choices": [{ "choice": "none" }, { "choice": "standard" }, { "choice": "opentelemetry" }] },
+    "Container": { "type": "parameter", "datatype": "bool", "defaultValue": "true", "replaces": "ContainerToken" },
+    "CiProvider": { "type": "parameter", "datatype": "choice", "defaultValue": "github-actions", "replaces": "CiProviderToken", "choices": [{ "choice": "none" }, { "choice": "github-actions" }, { "choice": "azure-devops" }] },
     "Controllers": { "type": "computed", "value": "ApiStyle == \"controllers\"" },
     "MinimalApi": { "type": "computed", "value": "ApiStyle == \"minimal\"" },
     "HasApi": { "type": "computed", "value": "ApiStyle != \"none\"" },
@@ -86,7 +94,14 @@
     "HasEfCore": { "type": "computed", "value": "DataProvider == \"efcore\" && DatabaseProvider != \"none\"" },
     "PostgreSql": { "type": "computed", "value": "DataProvider == \"efcore\" && DatabaseProvider == \"postgresql\"" },
     "SqlServer": { "type": "computed", "value": "DataProvider == \"efcore\" && DatabaseProvider == \"sqlserver\"" },
-    "Sqlite": { "type": "computed", "value": "DataProvider == \"efcore\" && DatabaseProvider == \"sqlite\"" }
+    "Sqlite": { "type": "computed", "value": "DataProvider == \"efcore\" && DatabaseProvider == \"sqlite\"" },
+    "HasHttpIntegration": { "type": "computed", "value": "Integration == \"http\" || Integration == \"hybrid\"" },
+    "HasMessaging": { "type": "computed", "value": "Integration == \"messaging\" || Integration == \"hybrid\"" },
+    "HasReliableMessaging": { "type": "computed", "value": "MessagePattern != \"none\"" },
+    "HasJobs": { "type": "computed", "value": "JobProcessing != \"none\"" },
+    "HasCache": { "type": "computed", "value": "CacheProvider != \"none\"" },
+    "RedisCache": { "type": "computed", "value": "CacheProvider == \"redis\"" },
+    "OpenTelemetry": { "type": "computed", "value": "Observability == \"opentelemetry\"" }
   },
   "sources": [
     {
@@ -98,7 +113,16 @@
         { "condition": "ApiStyle != \"minimal\"", "exclude": ["Endpoints/**", "Validation/**"] },
         { "condition": "ApiStyle == \"none\"", "exclude": ["Contracts/**"] },
         { "condition": "Authentication == \"none\"", "exclude": ["Authentication/**"] },
-        { "condition": "DataProvider != \"efcore\" || DatabaseProvider == \"none\"", "exclude": ["Persistence/**"] }
+        { "condition": "DataProvider != \"efcore\" || DatabaseProvider == \"none\"", "exclude": ["Persistence/**"] },
+        { "condition": "Integration != \"http\" && Integration != \"hybrid\"", "exclude": ["Integrations/**"] },
+        { "condition": "Integration != \"messaging\" && Integration != \"hybrid\"", "exclude": ["Messaging/**"] },
+        { "condition": "MessagePattern == \"none\"", "exclude": ["Reliability/**"] },
+        { "condition": "JobProcessing == \"none\"", "exclude": ["Jobs/**"] },
+        { "condition": "CacheProvider == \"none\"", "exclude": ["Caching/**"] },
+        { "condition": "Observability != \"opentelemetry\"", "exclude": ["Observability/**"] },
+        { "condition": "!Container", "exclude": ["Dockerfile", ".dockerignore"] },
+        { "condition": "CiProvider != \"github-actions\"", "exclude": [".github/**"] },
+        { "condition": "CiProvider != \"azure-devops\"", "exclude": ["azure-pipelines.yml"] }
       ]
     }
   ]

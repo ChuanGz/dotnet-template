@@ -2,7 +2,7 @@
 
 An option-driven template specification for teams building .NET APIs, backend services, integrations, and background workers with consistent engineering defaults.
 
-> **Status:** M5 data foundation complete. The repository contains an installable template with API and relational persistence options. Enterprise integrations and production packaging remain roadmap work.
+> **Status:** M1–M8 implementation and local validation complete. External-link and platform-specific checks remain continuously enforced in CI.
 
 ## Purpose
 
@@ -46,6 +46,15 @@ dotnet new dotnet-service -n LookupService --api-style minimal --data-provider n
 ```
 
 Database-enabled projects require `ConnectionStrings__ServiceDatabase`. See [Data and Migrations](docs/guides/data-and-migrations.md) before creating a migration or changing transaction behavior.
+
+## Documentation index
+
+- [Adopt and operate the template](docs/guides/adoption.md)
+- [Template options](docs/reference/template-options.md)
+- [Data and migrations](docs/guides/data-and-migrations.md)
+- [Enterprise capabilities](docs/guides/enterprise-capabilities.md)
+- [Migration strategy](docs/governance/migration-strategy.md)
+- [Deprecation policy](docs/governance/deprecation-policy.md)
 
 ## Implementation acceptance criteria
 

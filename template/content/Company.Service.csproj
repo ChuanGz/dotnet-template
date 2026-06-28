@@ -10,6 +10,12 @@
     <ApiVersioningEnabled>ApiVersioningToken</ApiVersioningEnabled>
     <DataProvider>DataProviderToken</DataProvider>
     <DatabaseProvider>DatabaseProviderToken</DatabaseProvider>
+    <Integration>IntegrationToken</Integration>
+    <MessageBroker>MessageBrokerToken</MessageBroker>
+    <MessagePattern>MessagePatternToken</MessagePattern>
+    <JobProcessing>JobProcessingToken</JobProcessing>
+    <CacheProvider>CacheProviderToken</CacheProvider>
+    <Observability>ObservabilityToken</Observability>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" Condition="'$(ApiVersioningEnabled)' == 'true'" />
@@ -29,5 +35,13 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.2" Condition="'$(TargetFramework)' == 'net10.0' and '$(DatabaseProvider)' == 'postgresql'" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.9" Condition="'$(TargetFramework)' == 'net10.0' and '$(DatabaseProvider)' == 'sqlserver'" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.9" Condition="'$(TargetFramework)' == 'net10.0' and '$(DatabaseProvider)' == 'sqlite'" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.10.0" Condition="'$(TargetFramework)' == 'net8.0' and ('$(Integration)' == 'http' or '$(Integration)' == 'hybrid')" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="10.0.1" Condition="'$(TargetFramework)' == 'net10.0' and ('$(Integration)' == 'http' or '$(Integration)' == 'hybrid')" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.24" Condition="'$(TargetFramework)' == 'net8.0' and '$(CacheProvider)' == 'redis'" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="10.0.1" Condition="'$(TargetFramework)' == 'net10.0' and '$(CacheProvider)' == 'redis'" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.16.0" Condition="'$(Observability)' == 'opentelemetry'" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.16.0" Condition="'$(Observability)' == 'opentelemetry'" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.16.0" Condition="'$(Observability)' == 'opentelemetry'" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.16.0" Condition="'$(Observability)' == 'opentelemetry'" />
   </ItemGroup>
 </Project>

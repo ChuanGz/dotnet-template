@@ -14,3 +14,6 @@ jobs:
             10.0.x
       - run: bash tests/m4/run.sh
       - run: bash tests/m5/run.sh
+      - run: bash tests/m6/run.sh
+      - run: bash tests/m7/run.sh
+      - run: bash tests/m8/run.sh

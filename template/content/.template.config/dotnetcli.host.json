@@ -8,6 +8,14 @@
     "Authentication": { "longName": "authentication" },
     "Authorization": { "longName": "authorization" },
     "DataProvider": { "longName": "data-provider" },
-    "DatabaseProvider": { "longName": "database-provider" }
+    "DatabaseProvider": { "longName": "database-provider" },
+    "Integration": { "longName": "integration" },
+    "MessageBroker": { "longName": "message-broker" },
+    "MessagePattern": { "longName": "message-pattern" },
+    "JobProcessing": { "longName": "job-processing" },
+    "CacheProvider": { "longName": "cache-provider" },
+    "Observability": { "longName": "observability" },
+    "Container": { "longName": "container" },
+    "CiProvider": { "longName": "ci-provider" }
   }
 }

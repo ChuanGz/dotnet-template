@@ -14,11 +14,48 @@ using Company.Service.Endpoints;
 #if (HasEfCore)
 using Company.Service.Persistence;
 #endif
+#if (HasHttpIntegration)
+using Company.Service.Integrations;
+#endif
+#if (HasMessaging)
+using Company.Service.Messaging;
+#endif
+#if (HasReliableMessaging)
+using Company.Service.Reliability;
+#endif
+#if (HasJobs)
+using Company.Service.Jobs;
+#endif
+#if (HasCache)
+using Company.Service.Caching;
+#endif
+#if (OpenTelemetry)
+using Company.Service.Observability;
+#endif
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.AddJsonConsole();
+#if (OpenTelemetry)
+builder.Services.AddServiceObservability(builder.Configuration);
+#endif
 
 builder.Services.AddProblemDetails();
 builder.Services.AddHealthChecks();
+#if (HasHttpIntegration)
+builder.Services.AddServiceHttpIntegrations(builder.Configuration);
+#endif
+#if (HasMessaging)
+builder.Services.AddServiceMessaging(builder.Configuration);
+#endif
+#if (HasReliableMessaging)
+builder.Services.AddReliableMessaging();
+#endif
+#if (HasJobs)
+builder.Services.AddServiceJobs();
+#endif
+#if (HasCache)
+builder.Services.AddServiceCaching(builder.Configuration);
+#endif
 #if (HasEfCore)
 builder.Services.AddServicePersistence(builder.Configuration);
 #endif
