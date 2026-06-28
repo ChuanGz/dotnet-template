@@ -1,18 +1,30 @@
-# dotnet-template
+# .NET Service Template
 
-Production-ready, option-driven .NET template for teams building APIs, backend services, integrations, and background processing with consistent architecture, security, testing, observability, and delivery standards.
+An option-driven template specification for teams building .NET APIs, backend services, integrations, and background workers with consistent engineering defaults.
 
-> Status: repository foundation. Template implementation is not available yet.
+> **Status:** Foundation stage. This repository defines the intended template scope, options, and compatibility rules; it does not yet contain an installable `dotnet new` template.
+
+## Purpose
+
+The project aims to reduce repeated setup decisions while keeping generated services proportional to their needs. Consumers select capabilities explicitly, and compatibility rules prevent invalid or misleading combinations.
+
+The current document is a reference for the proposed template contract. Commands shown below are illustrative and will not work until the template is implemented and installed.
 
 ## Supported use cases
 
-Supports ASP.NET Core REST APIs with Controllers or Minimal APIs, internal services, modular monoliths, database-backed services, HTTP and messaging integrations, background processing, and containers.
+The planned template covers:
 
-Does not target WPF, WinForms, WinUI, MAUI, Blazor UI, Razor Pages, MVC UI, games, Azure Functions, Kubernetes platforms, or legacy .NET Framework.
+- ASP.NET Core REST APIs using Controllers or Minimal APIs
+- Internal and database-backed services
+- Simple, layered, and modular-monolith structures
+- HTTP and messaging integrations
+- Background processing and container packaging
+
+It does not target desktop or client UI frameworks, Razor Pages, MVC UI, games, Azure Functions, Kubernetes platform provisioning, or legacy .NET Framework applications.
 
 ## Template options
 
-`production-api` is the proposed template short name used with `dotnet new`.
+`dotnet-service` is the proposed short name for future `dotnet new` usage. It identifies the platform and workload without coupling generated projects to a business domain or API-only architecture. Names, defaults, and generated behavior remain subject to implementation validation.
 
 | Group | Option | Values | Default | Purpose |
 |---|---|---|---|---|
@@ -38,6 +50,8 @@ Does not target WPF, WinForms, WinUI, MAUI, Blazor UI, Razor Pages, MVC UI, game
 
 ## Compatibility rules
 
+The generator must reject incompatible combinations or normalize them as described below. Recommendations should produce a warning rather than block generation.
+
 | Rule | Meaning |
 |---|---|
 | `data-provider = none` -> `database-provider = none` | No data access means no database configuration |
@@ -51,19 +65,32 @@ Does not target WPF, WinForms, WinUI, MAUI, Blazor UI, Razor Pages, MVC UI, game
 | `api-style = none` -> API versioning and OpenAPI are `false` | No API means no API metadata |
 | `job-processing = hangfire` -> `database-provider != none` | Hangfire requires persistence |
 | `database-provider = sqlite` | Warn for enterprise production use |
-| `cache-provider = redis` -> `container = true` recommended | Provide local Redis infrastructure |
-| `test-level = architecture` -> layered or modular recommended | Architecture tests need boundaries |
+| `cache-provider = redis` -> `container = true` (recommended) | Provide local Redis infrastructure |
+| `test-level = architecture` -> layered or modular (recommended) | Architecture tests need explicit boundaries |
 | `test-level = full` | Includes unit, integration, and architecture tests |
 
-## Example commands
+## Proposed usage
+
+These examples document the intended interface; they are not executable in the repository's current foundation stage.
 
 ```bash
-dotnet new production-api -n OrderService --api-style controllers
+dotnet new dotnet-service -n OrderService --api-style controllers
 ```
 
 ```bash
-dotnet new production-api -n LookupService --api-style minimal
+dotnet new dotnet-service -n LookupService --api-style minimal
 ```
+
+## Implementation acceptance criteria
+
+The foundation stage is complete when:
+
+- the template can be installed and discovered through `dotnet new list`;
+- every documented option maps to deterministic generated output;
+- invalid combinations fail with actionable messages;
+- supported combinations build and test successfully;
+- generated projects contain only the capabilities selected by the consumer; and
+- example commands are verified in automated tests.
 
 ## License
 
