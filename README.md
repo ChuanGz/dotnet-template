@@ -2,13 +2,11 @@
 
 An option-driven template specification for teams building .NET APIs, backend services, integrations, and background workers with consistent engineering defaults.
 
-> **Status:** Foundation stage. This repository defines the intended template scope, options, and compatibility rules; it does not yet contain an installable `dotnet new` template.
+> **Status:** M5 data foundation complete. The repository contains an installable template with API and relational persistence options. Enterprise integrations and production packaging remain roadmap work.
 
 ## Purpose
 
 The project aims to reduce repeated setup decisions while keeping generated services proportional to their needs. Consumers select capabilities explicitly, and compatibility rules prevent invalid or misleading combinations.
-
-The current document is a reference for the proposed template contract. Commands shown below are illustrative and will not work until the template is implemented and installed.
 
 ### Repository responsibility
 
@@ -30,21 +28,24 @@ It does not target desktop or client UI frameworks, Razor Pages, MVC UI, games, 
 
 ## Template contract
 
-`dotnet-service` is the proposed short name for future `dotnet new` usage. It identifies the platform and workload without coupling generated projects to a business domain or API-only architecture.
+`dotnet-service` is the template short name. It identifies the platform and workload without coupling generated projects to a business domain or API-only architecture.
 
-The maintained [template option reference](docs/reference/template-options.md) defines proposed values, defaults, compatibility rules, and validation status. Options are not stable until M3 acceptance criteria pass.
+The maintained [template option reference](docs/reference/template-options.md) defines values, defaults, compatibility rules, and validation status.
 
-## Proposed usage
+## Usage
 
-These examples document the intended interface; they are not executable in the repository's current foundation stage.
+Install the local template, then generate only the capabilities the service needs:
 
 ```bash
-dotnet new dotnet-service -n OrderService --api-style controllers
+dotnet new install ./template/content
+dotnet new dotnet-service -n OrderService --api-style controllers --data-provider efcore --database-provider postgresql
 ```
 
 ```bash
-dotnet new dotnet-service -n LookupService --api-style minimal
+dotnet new dotnet-service -n LookupService --api-style minimal --data-provider none --database-provider none
 ```
+
+Database-enabled projects require `ConnectionStrings__ServiceDatabase`. See [Data and Migrations](docs/guides/data-and-migrations.md) before creating a migration or changing transaction behavior.
 
 ## Implementation acceptance criteria
 

@@ -13,7 +13,7 @@
 | API | `--api-style` | `controllers`, `minimal`, `none` | `controllers` | Select HTTP entry point |
 | API | `--api-versioning` | `true`, `false` | `true` | Include API versioning |
 | API | `--openapi` | `true`, `false` | `true` | Include OpenAPI generation |
-| Data | `--data-provider` | `none`, `efcore`, `dapper` | `efcore` | Select data access |
+| Data | `--data-provider` | `none`, `efcore` | `efcore` | Select data access |
 | Data | `--database-provider` | `none`, `postgresql`, `sqlserver`, `sqlite` | `postgresql` | Select database integration |
 | Integration | `--integration` | `none`, `http`, `messaging`, `hybrid` | `none` | Select external integration style |
 | Messaging | `--message-broker` | `none`, `rabbitmq`, `azure-service-bus`, `kafka` | `none` | Select message broker |

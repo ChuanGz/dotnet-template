@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "dotnet-template contributors",
+  "classifications": ["Web", "API", "Service"],
+  "identity": "DotNetTemplate.Service",
+  "name": ".NET Service",
+  "shortName": "dotnet-service",
+  "sourceName": "Company.Service",
+  "preferNameDirectory": true,
+  "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "net10.0",
+      "replaces": "FrameworkTarget",
+      "choices": [
+        { "choice": "net8.0", "description": ".NET 8 LTS" },
+        { "choice": "net10.0", "description": ".NET 10 LTS" }
+      ]
+    },
+    "ApiStyle": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "controllers",
+      "replaces": "ApiStyleToken",
+      "choices": [
+        { "choice": "controllers", "description": "Controller-based API" },
+        { "choice": "minimal", "description": "Minimal API" },
+        { "choice": "none", "description": "Service without HTTP business endpoints" }
+      ]
+    },
+    "OpenApi": { "type": "parameter", "datatype": "bool", "defaultValue": "true", "replaces": "OpenApiToken" },
+    "ApiVersioning": { "type": "parameter", "datatype": "bool", "defaultValue": "true", "replaces": "ApiVersioningToken" },
+    "Authentication": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "jwt",
+      "replaces": "AuthModeToken",
+      "choices": [
+        { "choice": "none" },
+        { "choice": "jwt" },
+        { "choice": "oidc" }
+      ]
+    },
+    "Authorization": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "policy",
+      "replaces": "AuthorizationModeToken",
+      "choices": [
+        { "choice": "none" },
+        { "choice": "basic" },
+        { "choice": "policy" }
+      ]
+    },
+    "DataProvider": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "efcore",
+      "replaces": "DataProviderToken",
+      "choices": [
+        { "choice": "none", "description": "No generated data access" },
+        { "choice": "efcore", "description": "Entity Framework Core" }
+      ]
+    },
+    "DatabaseProvider": {
+      "type": "parameter",
+      "datatype": "choice",
+      "defaultValue": "postgresql",
+      "replaces": "DatabaseProviderToken",
+      "choices": [
+        { "choice": "none", "description": "No generated database provider" },
+        { "choice": "postgresql", "description": "PostgreSQL" },
+        { "choice": "sqlserver", "description": "SQL Server" },
+        { "choice": "sqlite", "description": "SQLite" }
+      ]
+    },
+    "Controllers": { "type": "computed", "value": "ApiStyle == \"controllers\"" },
+    "MinimalApi": { "type": "computed", "value": "ApiStyle == \"minimal\"" },
+    "HasApi": { "type": "computed", "value": "ApiStyle != \"none\"" },
+    "HasApiVersioning": { "type": "computed", "value": "ApiStyle != \"none\" && ApiVersioning" },
+    "HasAuthentication": { "type": "computed", "value": "Authentication != \"none\"" },
+    "HasAuthorization": { "type": "computed", "value": "Authentication != \"none\" && Authorization != \"none\"" },
+    "BasicAuthorization": { "type": "computed", "value": "Authentication != \"none\" && Authorization == \"basic\"" },
+    "PolicyAuthorization": { "type": "computed", "value": "Authentication != \"none\" && Authorization == \"policy\"" },
+    "HasEfCore": { "type": "computed", "value": "DataProvider == \"efcore\" && DatabaseProvider != \"none\"" },
+    "PostgreSql": { "type": "computed", "value": "DataProvider == \"efcore\" && DatabaseProvider == \"postgresql\"" },
+    "SqlServer": { "type": "computed", "value": "DataProvider == \"efcore\" && DatabaseProvider == \"sqlserver\"" },
+    "Sqlite": { "type": "computed", "value": "DataProvider == \"efcore\" && DatabaseProvider == \"sqlite\"" }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [".template.config/**", "**/bin/**", "**/obj/**"],
+      "modifiers": [
+        { "condition": "ApiStyle != \"controllers\"", "exclude": ["Controllers/**"] },
+        { "condition": "ApiStyle != \"minimal\"", "exclude": ["Endpoints/**", "Validation/**"] },
+        { "condition": "ApiStyle == \"none\"", "exclude": ["Contracts/**"] },
+        { "condition": "Authentication == \"none\"", "exclude": ["Authentication/**"] },
+        { "condition": "DataProvider != \"efcore\" || DatabaseProvider == \"none\"", "exclude": ["Persistence/**"] }
+      ]
+    }
+  ]
+}

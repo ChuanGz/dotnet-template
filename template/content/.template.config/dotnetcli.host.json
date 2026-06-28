@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json.schemastore.org/dotnetcli.host",
+  "symbolInfo": {
+    "Framework": { "longName": "dotnet-version" },
+    "ApiStyle": { "longName": "api-style" },
+    "OpenApi": { "longName": "openapi" },
+    "ApiVersioning": { "longName": "api-versioning" },
+    "Authentication": { "longName": "authentication" },
+    "Authorization": { "longName": "authorization" },
+    "DataProvider": { "longName": "data-provider" },
+    "DatabaseProvider": { "longName": "database-provider" }
+  }
+}

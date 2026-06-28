@@ -19,3 +19,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Thi
 - Completed M3 with a versioned option contract, executable compatibility validator, automated cases, and CI enforcement.
 - Added migration and deprecation policies for long-lived generated projects.
 - Corrected the pre-release option contract version to `0.1.0`.
+- Completed M4 with an installable API template, aligned API contracts, real API versioning, validation, Problem Details, health checks, security configuration, OpenAPI, and generation CI across supported LTS targets.
+- Completed M5 with isolated EF Core persistence for PostgreSQL, SQL Server, and SQLite, database readiness checks, migration and transaction guidance, and provider generation tests.
+- Updated the pre-release option contract to `0.2.0` and removed the unimplemented Dapper choice.

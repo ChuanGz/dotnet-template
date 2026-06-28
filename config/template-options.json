@@ -1,5 +1,5 @@
 {
-  "contractVersion": "0.1.0",
+  "contractVersion": "0.2.0",
   "templateShortName": "dotnet-service",
   "options": [
     { "name": "dotnet-version", "default": "net10.0", "values": ["net8.0", "net10.0"] },
@@ -7,7 +7,7 @@
     { "name": "api-style", "default": "controllers", "values": ["controllers", "minimal", "none"] },
     { "name": "api-versioning", "default": "true", "values": ["true", "false"] },
     { "name": "openapi", "default": "true", "values": ["true", "false"] },
-    { "name": "data-provider", "default": "efcore", "values": ["none", "efcore", "dapper"] },
+    { "name": "data-provider", "default": "efcore", "values": ["none", "efcore"] },
     { "name": "database-provider", "default": "postgresql", "values": ["none", "postgresql", "sqlserver", "sqlite"] },
     { "name": "integration", "default": "none", "values": ["none", "http", "messaging", "hybrid"] },
     { "name": "message-broker", "default": "none", "values": ["none", "rabbitmq", "azure-service-bus", "kafka"] },
@@ -31,7 +31,7 @@
     { "kind": "normalize", "when": { "option": "api-style", "values": ["none"] }, "target": "openapi", "value": "false", "allowed": [], "message": "" },
     { "kind": "require", "when": { "option": "integration", "values": ["messaging", "hybrid"] }, "target": "message-broker", "value": null, "allowed": ["rabbitmq", "azure-service-bus", "kafka"], "message": "Messaging integration requires a message broker." },
     { "kind": "require", "when": { "option": "message-pattern", "values": ["outbox", "inbox-outbox"] }, "target": "integration", "value": null, "allowed": ["messaging", "hybrid"], "message": "Reliable message patterns require messaging integration." },
-    { "kind": "require", "when": { "option": "message-pattern", "values": ["outbox", "inbox-outbox"] }, "target": "data-provider", "value": null, "allowed": ["efcore", "dapper"], "message": "Reliable message patterns require persistent data access." },
+    { "kind": "require", "when": { "option": "message-pattern", "values": ["outbox", "inbox-outbox"] }, "target": "data-provider", "value": null, "allowed": ["efcore"], "message": "Reliable message patterns require persistent data access." },
     { "kind": "require", "when": { "option": "authorization", "values": ["basic", "policy"] }, "target": "authentication", "value": null, "allowed": ["jwt", "oidc"], "message": "Authorization requires authentication." },
     { "kind": "require", "when": { "option": "job-processing", "values": ["hangfire"] }, "target": "database-provider", "value": null, "allowed": ["postgresql", "sqlserver", "sqlite"], "message": "Hangfire requires a database provider." },
     { "kind": "warn", "when": { "option": "database-provider", "values": ["sqlite"] }, "target": "database-provider", "value": null, "allowed": [], "message": "Review SQLite suitability for production workloads." },

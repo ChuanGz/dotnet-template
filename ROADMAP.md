@@ -152,7 +152,17 @@ Documentation & Adoption
 - Health checks
 - Authentication and authorization
 
-**Review gate:** Supported API variants generate independently, build without manual changes, expose documented health and OpenAPI behavior, enforce the selected security configuration, and pass API tests.
+**Exit checklist:**
+
+- [x] `dotnet-service` is installable through the standard template engine.
+- [x] Controllers, Minimal API, and no-business-API modes generate independently.
+- [x] Generated projects include DI, configuration, Problem Details, validation, health checks, and optional OpenAPI.
+- [x] Authentication and authorization options produce explicit secure configuration.
+- [x] Unselected API styles and authentication implementation files are absent.
+- [x] Automated generation checks build every API style.
+- [x] An evidence-based M4 audit records implementation and deferred scope.
+
+**Review gate:** Supported API variants must generate independently and build without manual source changes. See the [M4 audit](docs/milestones/m4-api-template-core.md).
 
 **Deliverable:** A reusable production-ready API foundation.
 
@@ -169,7 +179,18 @@ Documentation & Adoption
 - Integration test infrastructure
 - Testcontainers guidance
 
-**Review gate:** Each provider can be selected independently, migrations and transaction behavior are documented, generated projects build, and database integration tests pass against real provider instances where supported.
+**Exit checklist:**
+
+- [x] EF Core can be enabled or removed through the canonical option contract.
+- [x] PostgreSQL, SQL Server, and SQLite generate and build independently.
+- [x] Data-free projects contain no persistence source or restored EF Core dependency.
+- [x] Readiness health checks verify database connectivity when persistence is enabled.
+- [x] Migrations are deployment-owned and never run implicitly at service startup.
+- [x] Transaction boundaries and Testcontainers usage are documented.
+- [x] Automated generation checks include a real SQLite provider smoke test.
+- [x] An evidence-based M5 audit records implementation and deferred scope.
+
+**Review gate:** Each provider can be selected independently, migrations and transaction behavior are documented, generated projects build, and database integration tests pass against real provider instances where supported. See the [M5 audit](docs/milestones/m5-data-template-core.md).
 
 **Deliverable:** A reusable production-ready data foundation.
 
