@@ -67,6 +67,14 @@ The foundation stage is complete when:
 - generated projects contain only the capabilities selected by the consumer; and
 - example commands are verified in automated tests.
 
+## Validation follow-up
+
+The following validation work is intentionally deferred:
+
+- M6: add real integration tests for RabbitMQ, Azure Service Bus, Kafka, outbox delivery, and Hangfire.
+- M7: execute Docker builds, security scans, and OpenTelemetry runtime verification in the repository gate.
+- M8: smoke-test the generated service, health endpoints, and runnable container.
+
 ## License
 
 Licensed under the MIT License. See [LICENSE](LICENSE).
