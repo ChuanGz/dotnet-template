@@ -1,0 +1,14 @@
+{
+  "cases": [
+    { "name": "defaults are valid", "overrides": {}, "valid": true, "normalized": { "dotnet-version": "net10.0" } },
+    { "name": "no data removes database", "overrides": { "data-provider": "none" }, "valid": true, "normalized": { "database-provider": "none" } },
+    { "name": "messaging requires broker", "overrides": { "integration": "messaging" }, "valid": false, "normalized": {} },
+    { "name": "messaging with broker is valid", "overrides": { "integration": "messaging", "message-broker": "rabbitmq" }, "valid": true, "normalized": {} },
+    { "name": "outbox requires messaging", "overrides": { "message-pattern": "outbox" }, "valid": false, "normalized": {} },
+    { "name": "anonymous disables authorization", "overrides": { "authentication": "none" }, "valid": true, "normalized": { "authorization": "none" } },
+    { "name": "no API disables API metadata", "overrides": { "api-style": "none" }, "valid": true, "normalized": { "api-versioning": "false", "openapi": "false" } },
+    { "name": "Hangfire requires database", "overrides": { "job-processing": "hangfire", "database-provider": "none" }, "valid": false, "normalized": { "data-provider": "none" } },
+    { "name": "unknown option is rejected", "overrides": { "unknown": "value" }, "valid": false, "normalized": {} },
+    { "name": "Redis without containers warns", "overrides": { "cache-provider": "redis", "container": "false" }, "valid": true, "normalized": {}, "warningCount": 1 }
+  ]
+}

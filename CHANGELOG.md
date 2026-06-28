@@ -16,3 +16,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Thi
 - Clarified repository ownership and moved the evolving option contract to a maintained reference.
 - Reframed M2 around .NET-specific adoption and automated enforcement of engineering standards.
 - Completed M2 with a .NET standards-adoption matrix, exception rules, baseline editor configuration, and evidence audit.
+- Completed M3 with a versioned option contract, executable compatibility validator, automated cases, and CI enforcement.
+- Added migration and deprecation policies for long-lived generated projects.
+- Corrected the pre-release option contract version to `0.1.0`.

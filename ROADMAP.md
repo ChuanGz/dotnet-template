@@ -123,7 +123,18 @@ Documentation & Adoption
 - Minimal API versus Controllers guidance
 - Simple, layered, and modular structure guidance
 
-**Review gate:** Defaults generate the smallest supported production service; invalid combinations are rejected with actionable messages; every option has deterministic output and a compatibility test plan.
+**Exit checklist:**
+
+- [x] One versioned machine-readable file owns option names, values, and defaults.
+- [x] Normalization and compatibility rules are executable rather than prose-only.
+- [x] Defaults, valid combinations, invalid combinations, and normalization have automated cases.
+- [x] CI validates the model without external package dependencies.
+- [x] Contract evolution rules cover defaults, additions, renames, removals, and migration.
+- [x] Migration and deprecation policies define consumer impact, notice, evidence, and removal gates.
+- [x] M4 and later generated-output responsibilities are explicit.
+- [x] An evidence-based M3 audit records completion and handoff.
+
+**Review gate:** M3 is complete only when the model validator and compatibility suite pass. See the [M3 audit](docs/milestones/m3-template-option-model.md).
 
 **Deliverable:** A stable, scalable configuration model.
 

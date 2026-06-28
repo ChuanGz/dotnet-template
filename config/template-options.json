@@ -1,0 +1,40 @@
+{
+  "contractVersion": "0.1.0",
+  "templateShortName": "dotnet-service",
+  "options": [
+    { "name": "dotnet-version", "default": "net10.0", "values": ["net8.0", "net10.0"] },
+    { "name": "project-structure", "default": "layered", "values": ["simple", "layered", "modular"] },
+    { "name": "api-style", "default": "controllers", "values": ["controllers", "minimal", "none"] },
+    { "name": "api-versioning", "default": "true", "values": ["true", "false"] },
+    { "name": "openapi", "default": "true", "values": ["true", "false"] },
+    { "name": "data-provider", "default": "efcore", "values": ["none", "efcore", "dapper"] },
+    { "name": "database-provider", "default": "postgresql", "values": ["none", "postgresql", "sqlserver", "sqlite"] },
+    { "name": "integration", "default": "none", "values": ["none", "http", "messaging", "hybrid"] },
+    { "name": "message-broker", "default": "none", "values": ["none", "rabbitmq", "azure-service-bus", "kafka"] },
+    { "name": "message-pattern", "default": "none", "values": ["none", "outbox", "inbox-outbox"] },
+    { "name": "job-processing", "default": "none", "values": ["none", "hosted-service", "hangfire"] },
+    { "name": "authentication", "default": "jwt", "values": ["none", "jwt", "oidc"] },
+    { "name": "authorization", "default": "policy", "values": ["none", "basic", "policy"] },
+    { "name": "cache-provider", "default": "none", "values": ["none", "memory", "redis"] },
+    { "name": "observability", "default": "opentelemetry", "values": ["none", "standard", "opentelemetry"] },
+    { "name": "container", "default": "true", "values": ["true", "false"] },
+    { "name": "test-level", "default": "integration", "values": ["unit", "integration", "architecture", "full"] },
+    { "name": "sample", "default": "module", "values": ["none", "basic", "module"] },
+    { "name": "ci-provider", "default": "github-actions", "values": ["none", "github-actions", "azure-devops"] }
+  ],
+  "rules": [
+    { "kind": "normalize", "when": { "option": "data-provider", "values": ["none"] }, "target": "database-provider", "value": "none", "allowed": [], "message": "" },
+    { "kind": "normalize", "when": { "option": "database-provider", "values": ["none"] }, "target": "data-provider", "value": "none", "allowed": [], "message": "" },
+    { "kind": "normalize", "when": { "option": "integration", "values": ["none", "http"] }, "target": "message-broker", "value": "none", "allowed": [], "message": "" },
+    { "kind": "normalize", "when": { "option": "authentication", "values": ["none"] }, "target": "authorization", "value": "none", "allowed": [], "message": "" },
+    { "kind": "normalize", "when": { "option": "api-style", "values": ["none"] }, "target": "api-versioning", "value": "false", "allowed": [], "message": "" },
+    { "kind": "normalize", "when": { "option": "api-style", "values": ["none"] }, "target": "openapi", "value": "false", "allowed": [], "message": "" },
+    { "kind": "require", "when": { "option": "integration", "values": ["messaging", "hybrid"] }, "target": "message-broker", "value": null, "allowed": ["rabbitmq", "azure-service-bus", "kafka"], "message": "Messaging integration requires a message broker." },
+    { "kind": "require", "when": { "option": "message-pattern", "values": ["outbox", "inbox-outbox"] }, "target": "integration", "value": null, "allowed": ["messaging", "hybrid"], "message": "Reliable message patterns require messaging integration." },
+    { "kind": "require", "when": { "option": "message-pattern", "values": ["outbox", "inbox-outbox"] }, "target": "data-provider", "value": null, "allowed": ["efcore", "dapper"], "message": "Reliable message patterns require persistent data access." },
+    { "kind": "require", "when": { "option": "authorization", "values": ["basic", "policy"] }, "target": "authentication", "value": null, "allowed": ["jwt", "oidc"], "message": "Authorization requires authentication." },
+    { "kind": "require", "when": { "option": "job-processing", "values": ["hangfire"] }, "target": "database-provider", "value": null, "allowed": ["postgresql", "sqlserver", "sqlite"], "message": "Hangfire requires a database provider." },
+    { "kind": "warn", "when": { "option": "database-provider", "values": ["sqlite"] }, "target": "database-provider", "value": null, "allowed": [], "message": "Review SQLite suitability for production workloads." },
+    { "kind": "warn", "when": { "option": "cache-provider", "values": ["redis"] }, "target": "container", "value": null, "allowed": [], "message": "Container support is recommended for local Redis infrastructure." }
+  ]
+}

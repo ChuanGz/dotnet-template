@@ -2,13 +2,13 @@
 
 ## Status and ownership
 
-This document owns the proposed `dotnet-service` option contract. Values and defaults remain provisional until M3 validates deterministic output and compatibility behavior. Changes require an option-model review and a changelog entry.
+`config/template-options.json` is the machine-readable source of truth for the versioned `dotnet-service` option contract. This document explains that contract for users. Changes require model validation, compatibility tests, and a changelog entry.
 
 ## Options
 
 | Group | Option | Values | Default | Generated effect |
 |---|---|---|---|---|
-| Runtime | `--dotnet-version` | `net8.0`, `net10.0` | `net8.0` | Select target framework |
+| Runtime | `--dotnet-version` | `net8.0`, `net10.0` | `net10.0` | Select target framework |
 | Structure | `--project-structure` | `simple`, `layered`, `modular` | `layered` | Select project boundaries |
 | API | `--api-style` | `controllers`, `minimal`, `none` | `controllers` | Select HTTP entry point |
 | API | `--api-versioning` | `true`, `false` | `true` | Include API versioning |
@@ -48,11 +48,11 @@ The generator must reject incompatible combinations or normalize them as stated.
 | `test-level = architecture` | Recommend layered or modular structure |
 | `test-level = full` | Include unit, integration, and architecture tests |
 
-## M3 acceptance evidence
+## Contract evolution
 
-- [ ] Every option maps to deterministic generated output.
-- [ ] Defaults generate the smallest supported production service.
-- [ ] Invalid combinations fail with actionable messages.
-- [ ] Normalized values are visible to the user.
-- [ ] Representative combinations build and test in CI.
-- [ ] Breaking option changes include migration guidance.
+- Additive values require compatibility cases and generated-output coverage before release.
+- Changed defaults require impact review and migration guidance.
+- Removed or renamed options require a contract-version change and documented replacement.
+- M4 and later milestones must map model values to deterministic generated output.
+
+Consumer-impacting changes follow the [migration strategy](../governance/migration-strategy.md) and [deprecation policy](../governance/deprecation-policy.md).
