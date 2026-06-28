@@ -14,11 +14,11 @@ M1 establishes the minimum repository foundation needed to develop the template 
 | Security and support boundaries exist | PASS | `SECURITY.md`, `SUPPORT.md` | Vulnerabilities and support requests have separate reporting paths. |
 | Evolution is maintained | PASS | `ROADMAP.md`, `CHANGELOG.md` | Planned milestones and notable changes are recorded separately. |
 | Markdown quality is automated | PASS | `.github/workflows/markdown-lint.yml` | Pushes and pull requests run Markdown lint and link validation. |
-| Default-branch documentation checks pass | PENDING | GitHub Actions result | The documentation quality workflow passes after these changes reach the default branch. |
+| Default-branch documentation checks pass | PASS | [GitHub Actions run 28318595624](https://github.com/ChuanGz/dotnet-template/actions/runs/28318595624) | The documentation quality workflow passes after the M1 changes reach the default branch. |
 
 ## Audit result
 
-**PARTIAL** — All required M1 controls are implemented. M1 must remain open until the documentation quality workflow passes on the default branch. No template implementation is required to close this milestone.
+**PASS** — All required M1 controls are implemented and supported by repository or CI evidence. Template implementation is intentionally deferred to later milestones.
 
 ## Process record
 
@@ -27,12 +27,13 @@ M1 establishes the minimum repository foundation needed to develop the template 
 | 2026-06-28 | Reviewed the M1 approach against `engineering-playbook` | Evidence-based exit criteria and milestone review gate | Adopted |
 | 2026-06-28 | Audited repository foundation files | Root governance files and `.github` community files | Required controls present |
 | 2026-06-28 | Added link validation and explicit M1 tracking | Documentation quality workflow, ROADMAP, CHANGELOG | Awaiting default-branch CI |
+| 2026-06-28 | Verified documentation checks after merge | [GitHub Actions run 28318595624](https://github.com/ChuanGz/dotnet-template/actions/runs/28318595624) | Passed; M1 closed |
 
-## Closure procedure
+## Closure evidence
 
-1. Merge the M1 documentation-quality changes to the default branch.
-2. Confirm Markdown lint and link validation pass in GitHub Actions.
-3. Record the workflow run link in this audit.
-4. Change the pending exit item and audit result to `PASS` in a dedicated closure change.
+- M1 changes are present on the default branch.
+- Markdown lint and link validation passed in GitHub Actions.
+- The workflow run is linked in this audit.
+- All ROADMAP exit criteria are complete.
 
 Reopen M1 if a required governance file is removed, repository navigation breaks, or documentation checks stop running on the default branch.

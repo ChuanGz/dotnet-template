@@ -79,7 +79,7 @@ Documentation & Adoption
 - [x] SECURITY and SUPPORT define reporting boundaries.
 - [x] ROADMAP and CHANGELOG record planned and notable repository evolution.
 - [x] CI validates Markdown formatting and links on pushes and pull requests.
-- [ ] Documentation quality workflow passes on the default branch after the M1 changes merge.
+- [x] Documentation quality workflow passes on the default branch after the M1 changes merge.
 - [x] An evidence-based M1 audit records scope, gaps, and completion status.
 
 **Review gate:** M1 is complete only when every checklist item has repository or CI evidence. File presence alone is insufficient. See the [M1 foundation audit](docs/milestones/m1-repository-foundation.md).
