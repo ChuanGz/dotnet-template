@@ -97,8 +97,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 #endif
 
-app.MapHealthChecks("/health/live", new HealthCheckOptions { Predicate = _ => false });
-app.MapHealthChecks("/health/ready");
+app.MapHealthChecks("/health/live", new HealthCheckOptions { Predicate = _ => false }).AllowAnonymous();
+app.MapHealthChecks("/health/ready").AllowAnonymous();
 #if (Controllers)
 app.MapControllers();
 #endif

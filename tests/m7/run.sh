@@ -21,8 +21,16 @@ for framework in net8.0 net10.0; do
       -e ASPNETCORE_ENVIRONMENT=Production -e OTEL_EXPORTER_OTLP_ENDPOINT=http://127.0.0.1:4317 "$image" >/dev/null
     trap 'docker rm -f "$container" >/dev/null 2>&1 || true; rm -rf "$work"' EXIT
     port=$(docker port "$container" 8080/tcp | sed 's/.*://')
-    for _ in {1..30}; do curl --fail --silent "http://127.0.0.1:$port/health/live" >/dev/null && break; sleep 1; done
-    curl --fail --silent "http://127.0.0.1:$port/health/live" >/dev/null
+    healthy=0
+    for _ in {1..30}; do
+      if curl --fail --silent --show-error "http://127.0.0.1:$port/health/live" >/dev/null; then healthy=1; break; fi
+      sleep 1
+    done
+    if [[ "$healthy" != "1" ]]; then
+      docker logs "$container" >&2
+      echo "Container liveness probe failed for $framework." >&2
+      exit 1
+    fi
     if curl --fail --silent "http://127.0.0.1:$port/swagger/index.html" >/dev/null; then
       echo "Swagger must not be exposed in Production by default." >&2; exit 1
     fi
