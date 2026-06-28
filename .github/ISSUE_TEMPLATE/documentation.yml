@@ -1,0 +1,8 @@
+name: Documentation
+description: Report unclear documentation
+body:
+  - type: textarea
+    attributes:
+      label: Documentation gap
+    validations:
+      required: true
