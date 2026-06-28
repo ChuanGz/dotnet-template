@@ -2,7 +2,7 @@
 
 An option-driven template specification for teams building .NET APIs, backend services, integrations, and background workers with consistent engineering defaults.
 
-> **Status:** M1–M8 implementation and local validation complete. External-link and platform-specific checks remain continuously enforced in CI.
+> **Status:** The template contract and its supported generation paths are implemented and validated. Production broker adapters, durable outbox dispatch, and Hangfire storage are optional reference extensions, not template release blockers.
 
 ## Purpose
 
@@ -47,10 +47,53 @@ dotnet new dotnet-service -n LookupService --api-style minimal --data-provider n
 
 Database-enabled projects require `ConnectionStrings__ServiceDatabase`. See [Data and Migrations](docs/guides/data-and-migrations.md) before creating a migration or changing transaction behavior.
 
+## How it works
+
+1. Install the template package with `dotnet new install`.
+2. Run `dotnet new dotnet-service` with the capabilities required by the service.
+3. The template validates option compatibility, evaluates computed conditions, and includes only the matching source files and configuration.
+4. The generated project is restored, built, tested, and maintained like a normal .NET application.
+
+The template makes creation-time decisions. It is not a framework, runtime, deployment platform, or application host.
+
+## What is the output?
+
+The output is a standalone .NET application source tree. Depending on the selected options, it can contain API endpoints, persistence, authentication, integrations, messaging contracts, background jobs, caching, observability, container files, and CI configuration.
+
+Capabilities that are not selected are excluded rather than left as disabled scaffolding. The generated project does not reference this repository and does not require the template to build or run.
+
+## Flow new features to the template
+
+Changes intended for future applications should be implemented in `template/content` and delivered through the template contract:
+
+1. Add or update the implementation in the generated source tree.
+2. For optional behavior, define the option and compatibility rules, then conditionally include its files and package references.
+3. Add generation, build, and behavior tests for enabled and disabled cases.
+4. Update the option reference and generated-project documentation in the same change.
+
+Existing generated applications do not receive the change automatically. Teams adopt applicable improvements through their normal application change and review process.
+
+## Can capabilities be installed later?
+
+Yes, but installation after generation is an application change, not a template operation. A team can add the required packages, source files, configuration, and tests manually, or generate a temporary project with the desired options and selectively merge the relevant changes.
+
+Regenerating over an existing application is not an upgrade mechanism because it can overwrite application-owned decisions. Use the [migration strategy](docs/governance/migration-strategy.md) when adopting newer template capabilities.
+
+## How does the template coexist with the generated application?
+
+The template repository is the upstream blueprint; the generated application is an independently owned snapshot. After generation:
+
+- application teams own business code, configuration, migrations, deployment, and dependency updates;
+- template changes affect newly generated applications only; and
+- reusable improvements can flow back into the template when they are broadly applicable and preserve its option contract.
+
+This boundary lets generated services evolve independently without coupling their build or release lifecycle to the template repository.
+
 ## Documentation index
 
 - [Adopt and operate the template](docs/guides/adoption.md)
 - [Template options](docs/reference/template-options.md)
+- [Production readiness decisions](docs/architecture/production-readiness.md)
 - [Data and migrations](docs/guides/data-and-migrations.md)
 - [Enterprise capabilities](docs/guides/enterprise-capabilities.md)
 - [Migration strategy](docs/governance/migration-strategy.md)
@@ -69,11 +112,11 @@ The foundation stage is complete when:
 
 ## Validation follow-up
 
-The following validation work is intentionally deferred:
+The template release is validated independently from optional end-to-end infrastructure reference implementations:
 
-- M6: add real integration tests for RabbitMQ, Azure Service Bus, Kafka, outbox delivery, and Hangfire.
-- M7: execute Docker builds, security scans, and OpenTelemetry runtime verification in the repository gate.
-- M8: smoke-test the generated service, health endpoints, and runnable container.
+- M6: representative messaging, reliability, jobs, and cache combinations are generation- and build-tested. Real RabbitMQ, Azure Service Bus, Kafka, outbox-delivery, and Hangfire infrastructure samples are optional extensions.
+- M7: CI now builds and runs .NET 8 and .NET 10 containers, probes liveness with OpenTelemetry enabled, verifies Swagger is closed in Production, and gates CodeQL and Trivy findings.
+- M8: generated-service and container smoke tests are automated; external link checks remain CI-owned.
 
 ## License
 

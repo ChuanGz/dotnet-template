@@ -84,6 +84,7 @@
     "Container": { "type": "parameter", "datatype": "bool", "defaultValue": "true", "replaces": "ContainerToken" },
     "CiProvider": { "type": "parameter", "datatype": "choice", "defaultValue": "github-actions", "replaces": "CiProviderToken", "choices": [{ "choice": "none" }, { "choice": "github-actions" }, { "choice": "azure-devops" }] },
     "Controllers": { "type": "computed", "value": "ApiStyle == \"controllers\"" },
+    "Net8": { "type": "computed", "value": "Framework == \"net8.0\"" },
     "MinimalApi": { "type": "computed", "value": "ApiStyle == \"minimal\"" },
     "HasApi": { "type": "computed", "value": "ApiStyle != \"none\"" },
     "HasApiVersioning": { "type": "computed", "value": "ApiStyle != \"none\" && ApiVersioning" },

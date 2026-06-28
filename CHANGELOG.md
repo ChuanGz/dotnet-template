@@ -8,6 +8,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Thi
 
 ### Added
 
+- Centralized generated-project dependency versions in `Directory.Packages.props`.
+- Added generated container runtime, liveness, OpenTelemetry startup, and production Swagger checks.
+- Added CodeQL and Trivy security gates.
+
 - Initialized the repository foundation and governance documentation.
 - Defined the proposed template options, compatibility rules, and supported use cases.
 - Added the M1 exit checklist, evidence audit, and milestone progress record.

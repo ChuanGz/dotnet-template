@@ -83,8 +83,12 @@ var app = builder.Build();
 app.UseExceptionHandler();
 app.UseStatusCodePages();
 #if (OpenApi)
-app.UseSwagger();
-app.UseSwaggerUI();
+var exposeOpenApi = app.Configuration.GetValue<bool?>("OpenApi:Enabled") ?? app.Environment.IsDevelopment();
+if (exposeOpenApi)
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 #endif
 #if (HasAuthentication)
 app.UseAuthentication();
@@ -93,8 +97,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 #endif
 
-app.MapHealthChecks("/health/live", new HealthCheckOptions { Predicate = _ => false });
-app.MapHealthChecks("/health/ready");
+app.MapHealthChecks("/health/live", new HealthCheckOptions { Predicate = _ => false }).AllowAnonymous();
+app.MapHealthChecks("/health/ready").AllowAnonymous();
 #if (Controllers)
 app.MapControllers();
 #endif

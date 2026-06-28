@@ -20,7 +20,7 @@ dotnet build --no-restore
 dotnet run
 ```
 
-Health endpoints are `/health/live` and `/health/ready`. When enabled, Swagger UI is available at `/swagger`.
+Health endpoints are `/health/live` and `/health/ready`. When generated, Swagger UI is exposed at `/swagger` only in Development by default. Set `OpenApi__Enabled=true` to expose it explicitly in another environment.
 
 Authentication-enabled projects require a real HTTPS authority and audience. Replace the non-routable example authority through configuration; do not commit secrets.
 
