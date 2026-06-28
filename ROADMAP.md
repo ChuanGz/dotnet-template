@@ -23,7 +23,7 @@ The template is intended to remain stable across thousands of generated projects
 Repository Foundation
         │
         ▼
-Core Standards
+.NET Standards Adoption
         │
         ▼
 Template Option Model
@@ -49,7 +49,7 @@ Documentation & Adoption
 | Milestone | Name | Goal | Deliverable |
 |---|---|---|---|
 | M1 | Repository Foundation | Establish a professional, reviewable repository | OSS-like repository foundation |
-| M2 | Core Standards | Define engineering decisions before code | Approved engineering standards |
+| M2 | .NET Standards Adoption | Convert principles into enforceable .NET decisions | Approved standards-adoption matrix |
 | M3 | Template Option Model | Stabilize configuration and compatibility contracts | Scalable option model |
 | M4 | API Template Core | Implement the common service path | Production-ready API foundation |
 | M5 | Data Template Core | Add reliable relational data support | Production-ready data foundation |
@@ -86,20 +86,29 @@ Documentation & Adoption
 
 **Deliverable:** A professional OSS-like repository foundation.
 
-### M2 — Core Standards
+### M2 — .NET Standards Adoption
 
-**Goal:** Agree on engineering behavior before template implementation makes it expensive to change.
+**Goal:** Convert accepted engineering principles into explicit .NET decisions and enforceable generated-project controls before implementation makes them expensive to change.
 
 **Scope:**
 
-- Coding and project structure standards
-- API, validation, logging, testing, and documentation standards
-- CI/CD standards and security baseline
-- Template philosophy, boundaries, and non-goals
+- Mapping from engineering principle to .NET decision, generated artifact, and automated evidence
+- Coding, project structure, API, validation, logging, testing, and documentation decisions
+- CI/CD controls and security baseline for generated projects
+- Template philosophy, boundaries, defaults, and non-goals
 
-**Review gate:** Each standard defines its problem, decision, trade-offs, applicability, and verification method. Conflicting or speculative guidance is removed.
+**Exit checklist:**
 
-**Deliverable:** Engineering standards established before implementation.
+- [x] The standards-adoption matrix covers code, structure, API, configuration, validation, errors, logging, testing, documentation, CI, dependencies, and security.
+- [x] Every adopted decision names its generated artifact and automated evidence.
+- [x] Applicability, trade-offs, exceptions, and M3 implementation handoffs are explicit.
+- [x] Technology-neutral guidance and speculative patterns are excluded.
+- [x] Baseline C# formatting and language rules are represented in `.editorconfig`.
+- [x] An evidence-based M2 audit records the review result and remaining implementation work.
+
+**Review gate:** Every adopted rule changes generated output or automated validation, states its .NET-specific trade-off, and has an observable pass condition. See the [M2 audit](docs/milestones/m2-dotnet-standards-adoption.md).
+
+**Deliverable:** A reviewable .NET standards-adoption matrix established before implementation.
 
 ### M3 — Template Option Model
 

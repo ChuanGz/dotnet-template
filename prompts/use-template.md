@@ -6,14 +6,15 @@ Establish project context before requesting implementation work.
 
 ## Required input
 
-- Selected template options: `[options]`
+- Original generation command or recorded template options: `[options]`
 - Relevant README and documentation excerpts: `[context]`
-- Project structure: `[tree or relevant paths]`
+- Generated project structure and project files: `[tree or relevant paths]`
+- Available build, test, format, and CI commands: `[commands]`
 - Task and acceptance criteria: `[requirements]`
 
 ## Prompt
 
-Explain how the selected options shape this project and where the requested change belongs. Identify applicable conventions, constraints, compatibility rules, and validation commands. List assumptions or missing information before proposing changes.
+Explain how the selected `dotnet-service` options shape this project and where the requested change belongs. Identify generated boundaries, included and excluded capabilities, compatibility constraints, and validation commands. List assumptions or missing evidence before proposing changes.
 
 ## Output expectation
 
@@ -21,7 +22,7 @@ A concise implementation boundary, affected areas, risks, and validation plan.
 
 ## Constraints
 
-Do not change template options, invent conventions, add patterns, or write code until the context is sufficient.
+Do not reinterpret template options, enable an unselected capability, invent paths or commands, add patterns, or write code until the generated-project evidence is sufficient.
 
 ## Review checklist
 

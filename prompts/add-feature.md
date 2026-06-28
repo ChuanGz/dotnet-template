@@ -7,13 +7,14 @@ Implement one bounded feature using the generated project's conventions.
 ## Required input
 
 - Feature behavior and acceptance criteria: `[requirements]`
+- Selected template options and generated capability set: `[options]`
 - Relevant files or similar feature: `[context]`
-- Selected template options and standards: `[constraints]`
+- Generated project conventions and validation commands: `[constraints and commands]`
 - Allowed change scope: `[files or modules]`
 
 ## Prompt
 
-Implement the smallest change that satisfies the acceptance criteria. Follow existing boundaries, naming, dependency, validation, error-handling, security, and testing conventions. State assumptions and explain any new dependency or abstraction.
+Implement the smallest change that satisfies the acceptance criteria inside the generated project's existing capability set. Follow its structure, API style, data access, validation, error-handling, security, observability, and test options. State assumptions and justify any new dependency or abstraction against an observed problem.
 
 ## Output expectation
 
@@ -21,7 +22,7 @@ Focused production code, relevant tests, documentation updates, and validation c
 
 ## Constraints
 
-Do not rewrite project structure, bypass compatibility rules, add unrelated patterns, or expand scope without approval.
+Do not change selected options, rewrite generated structure, enable an optional capability implicitly, bypass compatibility rules, add CQRS/MediatR/Repository Pattern without evidence, or expand scope without approval.
 
 ## Review checklist
 
